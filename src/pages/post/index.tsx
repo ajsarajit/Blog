@@ -11,7 +11,7 @@ interface obj{
 
 const Post = () => {
   const router = useRouter();
-  //console.log(router.query);
+ 
   const { title, blogText, id } = router.query;
 
   const handleDelete = () => {
@@ -22,24 +22,7 @@ const Post = () => {
       .then(() => console.log("User deleted"));
     router.push("/")
   };
-
-
   
-  const handleUpdate = (e:any) => {
-    e.preventDefault();
-    fetch(`http://localhost:8000/blogs/${id}`, {
-  method: 'PATCH',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    title: e.target.title,
-    blogtext: e.target.blogtext
- }),
-})
-.then(response => response.json())
-.then(user => console.log(user));
-  }
 
   return (
     <div>
@@ -49,7 +32,13 @@ const Post = () => {
       <button>
         <Link href="/">Back</Link>
       </button>
-      <button onClick={handleUpdate}>Update</button>
+      <button><Link href={{
+        pathname:"/edit",
+        query:{title,blogText,id}
+      }}
+      as={`/edit/${id}`}
+      >Update</Link>
+      </button>
       <button onClick={handleDelete}>Delete</button>
     </div>
   );
