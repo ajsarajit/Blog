@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -8,9 +9,9 @@ interface obj{
   id:"string"
 }
 
-const post = () => {
+const Post = () => {
   const router = useRouter();
-  console.log(router.query);
+  //console.log(router.query);
   const { title, blogText, id } = router.query;
 
   const handleDelete = () => {
@@ -19,7 +20,7 @@ const post = () => {
     })
       .then((response) => response.json())
       .then(() => console.log("User deleted"));
-    router.back()
+    router.push("/")
   };
 
 
@@ -54,4 +55,4 @@ const post = () => {
   );
 };
 
-export default post;
+export default Post;
